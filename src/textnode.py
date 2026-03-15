@@ -1,5 +1,7 @@
 from enum import Enum
 
+from src.leafnode import LeafNode
+
 
 class TextType(Enum):
     TEXT = "text"
@@ -8,6 +10,26 @@ class TextType(Enum):
     CODE = "code"
     LINK = "link"
     IMAGE = "image"
+
+
+def text_node_to_html_node(text_node):
+    text = text_node.text
+    text_type = text_node.text_type
+    match text_type:
+        case text_type.TEXT:
+            return LeafNode(None, value=text)
+        case text_type.BOLD:
+            return LeafNode("b", value=text)
+        case text_type.ITALIC:
+            return LeafNode("i", value=text)
+        case text_type.CODE:
+            return LeafNode("code", value=text)
+        case text_type.LINK:
+            return LeafNode("a", value=text, props={"href": text_node.url})
+        case text_type.IMAGE:
+            return LeafNode("img", "", props={"src": text_node.url, "alt": text})
+        case _:
+            raise Exception("Invalid text type")
 
 
 class TextNode:
