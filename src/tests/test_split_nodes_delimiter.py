@@ -82,3 +82,16 @@ class TestSplitNodesDelimiter(unittest.TestCase):
             TextNode(" me daddy", TextType.TEXT),
         ]
         self.assertEqual(split_nodes_delimiter(nodes, "_", TextType.ITALIC), expected)
+
+    def test_joined_delimiter(self):
+        nodes = [TextNode("This is a ***joined*** delimiter", TextType.TEXT)]
+        expected = [
+            TextNode("This is a ", TextType.TEXT),
+            TextNode("*joined", TextType.BOLD),
+            TextNode("* delimiter", TextType.TEXT),
+        ]
+        self.assertEqual(split_nodes_delimiter(nodes, "**", TextType.BOLD), expected)
+
+
+if __name__ == "__main__":
+    unittest.main()
