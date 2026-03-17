@@ -1,5 +1,4 @@
 from nodes.textnode import TextNode, TextType
-from pprint import pprint
 
 
 def split_text_by_delimiter(
