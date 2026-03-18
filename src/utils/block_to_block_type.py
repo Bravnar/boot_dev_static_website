@@ -13,9 +13,10 @@ class BlockType(Enum):
 
 def check_heading(lines):
     pattern = r"^(#{1,6} )"
-    for line in lines:
-        if not re.findall(pattern, line):
-            return BlockType.PARAGRAPH
+    if len(lines) > 1:
+        return BlockType.PARAGRAPH
+    if not re.findall(pattern, lines[0]):
+        return BlockType.PARAGRAPH
     return BlockType.HEADING
 
 
@@ -40,10 +41,15 @@ def check_ul(lines):
 
 
 def check_ol(lines):
+    found_nums = []
     for line in lines:
-        if not re.findall(r"^(\d+. )", line):
+        found_num = re.findall(r"^(\d+. )", line)
+        if not found_num:
             return BlockType.PARAGRAPH
-    return BlockType.OL
+        found_nums.append(int(found_num.pop().strip().strip(".")))
+    if found_nums == list(range(1, len(found_nums) + 1)):
+        return BlockType.OL
+    return BlockType.PARAGRAPH
 
 
 def block_to_block_type(block):
