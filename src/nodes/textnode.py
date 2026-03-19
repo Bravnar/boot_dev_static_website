@@ -15,18 +15,19 @@ class TextType(Enum):
 def text_node_to_html_node(text_node):
     text = text_node.text
     text_type = text_node.text_type
+    # print(f"text: {repr(text)}, type: {text_type}")
     match text_type:
-        case text_type.TEXT:
+        case TextType.TEXT:
             return LeafNode(None, value=text)
-        case text_type.BOLD:
+        case TextType.BOLD:
             return LeafNode("b", value=text)
-        case text_type.ITALIC:
+        case TextType.ITALIC:
             return LeafNode("i", value=text)
-        case text_type.CODE:
+        case TextType.CODE:
             return LeafNode("code", value=text)
-        case text_type.LINK:
+        case TextType.LINK:
             return LeafNode("a", value=text, props={"href": text_node.url})
-        case text_type.IMAGE:
+        case TextType.IMAGE:
             return LeafNode("img", "", props={"src": text_node.url, "alt": text})
         case _:
             raise Exception("Invalid text type")

@@ -40,6 +40,7 @@ the **same** even with inline stuff
 # Hello World!
 
 > Great minds think alike
+>
 > Said no one ever
 
 """
@@ -47,7 +48,7 @@ the **same** even with inline stuff
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><h1>Hello World!</h1><blockquote>Great minds think alike Said no one ever</blockquote></div>",
+            "<div><h1>Hello World!</h1><blockquote>Great minds think alike  Said no one ever</blockquote></div>",
         )
 
     def test_ul_ol(self):

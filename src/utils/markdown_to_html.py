@@ -12,6 +12,7 @@ def text_to_children(text):
     leaf_nodes = []
     for text_node in text_nodes:
         leaf_nodes.append(text_node_to_html_node(text_node))
+    # print(f"DEBUG:\n{leaf_nodes}")
     return leaf_nodes
 
 
@@ -90,5 +91,6 @@ def markdown_to_html_node(md):
     list_of_parents = []
     for block in blocks:
         node = create_block_node(block)
+        # print(f"block: {repr(block[:30])}, node: {node}")
         list_of_parents.append(node)
     return ParentNode("div", list_of_parents)

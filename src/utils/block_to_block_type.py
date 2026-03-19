@@ -28,7 +28,7 @@ def check_code(lines):
 
 def check_quote(lines):
     for line in lines:
-        if not ((line[0] == ">" and line[1] != " ") or line.startswith("> ")):
+        if not (line.startswith(">") or line.startswith("> ")):
             return BlockType.PARAGRAPH
     return BlockType.QUOTE
 
