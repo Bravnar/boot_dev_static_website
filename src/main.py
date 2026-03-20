@@ -7,7 +7,7 @@ def main():
     base_path = sys.argv[1] if len(sys.argv) > 1 else "/"
     print(base_path)
     print("Welcome to the Static Website Generator")
-    static_to_public()
+    static_to_public("static/", "docs/")
     generate_pages_recursive("content", "template.html", "docs", base_path)
 
 
